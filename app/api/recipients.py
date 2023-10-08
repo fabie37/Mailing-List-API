@@ -65,10 +65,7 @@ def get_all_recipients():
     """
         Returns a list of all recipients found in db
     """
-    all_recipients = []
-    for recipient in Recipients.objects():
-        all_recipients.append(recipient)
-    
+    all_recipients = [loads(recipient.to_json()) for recipient in Recipients.objects()]
     return construct_response(all_recipients, 200)
 
 def post_a_recipient(validated_json_data):
