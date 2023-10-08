@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %} Unsubscribe {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="email">email</label>
+    <input type="text" name="email" id="email"></input>
+    <input type="submit">Unsubscribe</input>
+</form>
+{% endblock %}
