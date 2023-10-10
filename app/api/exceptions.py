@@ -1,13 +1,15 @@
 """
     This file contains API exceptions that maybe raised through calling certain functions.
 """
+
 def generate_error_response(message, http_code):
     """
         Creates the format suitable for flask to process errors
     """
     return {"success": False, "error":message}, http_code
+    
 
-def flask_parameter_validation_error_handler(error):
+def json_api_parameter_validation_error_handler(error):
     """
         Using this library, we can change the default validation paramter.
     """

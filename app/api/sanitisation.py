@@ -64,7 +64,7 @@ def remove_fields_from_request_not_in_document(document:Document, ignore_fields)
         remove_field_from_request_json(field)
 
 
-def extract_document_fields(document: Document, ignore_fields=None):
+def extract_document_fields_from_json(document: Document, ignore_fields=None):
     """
         Allows you to ignore any input that doesn't involve Document fields.
         The ignore_fields param enables you to also disregard additional fields such as DateTimeField()s 
