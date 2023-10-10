@@ -65,6 +65,8 @@ systemctl restart nginx
 
 ### Installing SSL (Let's encrypt!)
 
+using this tutorial https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/
+
 ```
 $ apt-get update
 $ sudo apt-get install certbot
