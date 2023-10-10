@@ -73,7 +73,7 @@ def recipients_get():
 
 @app.route("/api/recipients", methods=['POST'])
 @limiter.limit("1/second", override_defaults=False)
-@protected
+# @protected
 @extract_document_fields_from_json(Recipients, ["joined", "hash", "_id"])
 @sanitise_json(Recipients)
 def recipients_post():
