@@ -3,4 +3,4 @@
 
     Needed inorder to export module
 """
-from .env import *
+from app.env.env import *

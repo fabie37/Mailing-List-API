@@ -5,8 +5,8 @@
 """
 from functools import wraps
 from flask import request
-from ..env import API_KEY
-from .exceptions import APIAuthError, generate_error_response
+from app.env import API_KEY
+from app.api.exceptions import APIAuthError, generate_error_response
 
 
 def get_api_key_from_request():

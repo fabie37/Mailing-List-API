@@ -11,11 +11,11 @@ from flask import Flask, request, render_template, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_parameter_validation import ValidateParameters, Route
-from .env import MONGO_URI, PORT, LOCAL_HOST
-from .api import Recipients, get_all_recipients, post_a_recipient, delete_a_recipient
-from .api.auth import protected
-from .api.sanitisation import sanitise_json, extract_document_fields_from_json
-from .api.exceptions import json_api_parameter_validation_error_handler
+from app.env import MONGO_URI, PORT, LOCAL_HOST
+from app.api import Recipients, get_all_recipients, post_a_recipient, delete_a_recipient
+from app.api.auth import protected
+from app.api.sanitisation import sanitise_json, extract_document_fields_from_json
+from app.api.exceptions import json_api_parameter_validation_error_handler
 
 app = Flask(__name__)
 limiter = Limiter(get_remote_address,
@@ -106,3 +106,5 @@ def recipients_delete(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
     return delete_a_recipient(delete_hash)
     
 
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')

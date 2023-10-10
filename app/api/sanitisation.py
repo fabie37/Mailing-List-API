@@ -8,7 +8,7 @@ from functools import wraps
 from flask import request
 from mongoengine import Document, ValidationError
 from mongoengine.errors import MongoEngineException
-from .exceptions import generate_error_response
+from app.api.exceptions import generate_error_response
 
 def validate_json_using_document(document:Document):
     """

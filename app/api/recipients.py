@@ -3,9 +3,9 @@ import datetime
 from json import loads
 from mongoengine import Document, StringField, EmailField, DateTimeField, signals
 from mongoengine.errors import MongoEngineException, NotUniqueError
-from .exceptions import generate_error_response
-from ..env import SALT
-from .middleware import middleware
+from app.api.exceptions import generate_error_response
+from app.env import SALT
+from app.api.middleware import middleware
 
 def get_json_from_document(document):
     """
