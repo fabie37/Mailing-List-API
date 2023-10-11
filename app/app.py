@@ -6,6 +6,7 @@
 
 import requests
 import os
+import re
 from mongoengine import connect
 from werkzeug.middleware.proxy_fix import ProxyFix
 from flask import Flask, request, render_template, url_for
@@ -48,7 +49,10 @@ def unsubscribe_get(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
     """
     # api_url = r'http://'+LOCAL_HOST+r':'+PORT+r'/api/recipients/'+delete_hash
 
-    json = recipients_delete(delete_hash)
+    if (re.match(r'\b[A-Fa-f0-9]{64}\b', delete_hash) is None):
+        return render_template("unsubscribe.html", msg="User has already unsubscribed or is not found.")
+
+    json = delete_a_recipient(delete_hash)
     if (not json["success"] or json["success"] is False):
         return render_template("unsubscribe.html", msg="User has already unsubscribed or is not found.")
     return render_template("unsubscribe.html", msg=f'{json["payload"]["email"]} has now unsubscribed.')
