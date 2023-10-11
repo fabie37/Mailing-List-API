@@ -47,7 +47,8 @@ def unsubscribe_get(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
             delete_hash - Hash of user data needed to identify them in database
     """
     # api_url = r'http://'+LOCAL_HOST+r':'+PORT+r'/api/recipients/'+delete_hash
-    json = recipients_delete(delete_hash=delete_hash)
+
+    json = recipients_delete(delete_hash)
     if (not json["success"] or json["success"] is False):
         return render_template("unsubscribe.html", msg="User has already unsubscribed or is not found.")
     return render_template("unsubscribe.html", msg=f'{json["payload"]["email"]} has now unsubscribed.')
@@ -94,7 +95,7 @@ def recipients_post():
 
 
 @app.route("/api/recipients/<delete_hash>", methods=['DELETE'])
-@limiter.limit("1/second", override_defaults=False)
+@limiter.limit("5/second", override_defaults=False)
 @ValidateParameters(json_api_parameter_validation_error_handler)
 def recipients_delete(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
     """
