@@ -47,12 +47,15 @@ def unsubscribe_get(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
             delete_hash - Hash of user data needed to identify them in database
     """
     api_url = r'http://'+LOCAL_HOST+r':'+PORT+r'/api/recipients/'+delete_hash
-    print(api_url)
-    req = requests.delete(api_url, timeout=10)
-    json = req.json()
-    if (not json["success"] or json["success"] is False):
-        return render_template("unsubscribe.html", msg="User has already unsubscribed or is not found.")
-    return render_template("unsubscribe.html", msg=f'User {json["payload"]["email"]} has unsubscribed.')
+    try:
+        req = requests.delete(api_url, timeout=30)
+        json = req.json()
+        if (not json["success"] or json["success"] is False):
+            return render_template("unsubscribe.html", msg="User has already unsubscribed or is not found.")
+        return render_template("unsubscribe.html", msg=f'{json["payload"]["email"]} has now unsubscribed.')
+    except Exception as exc:
+        print(exc)
+        return render_template("unsubscribe.html", msg='Unable to complete this request. Please refresh the page.')
 
 """
     API ROUTES
@@ -109,5 +112,5 @@ def recipients_delete(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
     return delete_a_recipient(delete_hash)
     
 
-# if __name__ == "__main__":
-#     app.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
