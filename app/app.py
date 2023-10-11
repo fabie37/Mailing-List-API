@@ -47,13 +47,7 @@ def unsubscribe_get(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
         Params:
             delete_hash - Hash of user data needed to identify them in database
     """
-    
-    # Messy code, please clean up!
-    if (re.match(r'\b[A-Fa-f0-9]{64}\b', delete_hash) is None):
-        return render_template("unsubscribe.html", msg="User has already unsubscribed or is not found.")
-
     json = delete_a_recipient(delete_hash)[0]
-    print(json)
     if (not json["success"] or json["success"] is False):
         return render_template("unsubscribe.html", msg="User has already unsubscribed or is not found.")
     return render_template("unsubscribe.html", msg=f'{json["payload"]["email"]} has now unsubscribed.')

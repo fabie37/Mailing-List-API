@@ -1,6 +1,8 @@
 import hashlib
 import datetime
+import re
 from json import loads
+
 from mongoengine import Document, StringField, EmailField, DateTimeField, signals
 from mongoengine.errors import MongoEngineException, NotUniqueError
 from app.api.exceptions import generate_error_response
