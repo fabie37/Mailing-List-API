@@ -7,6 +7,7 @@
 import requests
 import os
 from mongoengine import connect
+from werkzeug.middleware.proxy_fix import ProxyFix
 from flask import Flask, request, render_template, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -18,6 +19,7 @@ from app.api.sanitisation import sanitise_json, extract_document_fields_from_jso
 from app.api.exceptions import json_api_parameter_validation_error_handler
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1,x_host=1,x_prefix=1)
 limiter = Limiter(get_remote_address,
                   app=app,
                   default_limits=["200 per day", "50 per hour"],
