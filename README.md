@@ -21,7 +21,7 @@ User=ubuntu
 Group=www-data
 WorkingDirectory=/home/ubuntu/Mailing-List-API
 Environment="PATH=/home/ubuntu/Mailing-List-API/venv/bin"
-ExecStart=sudo /home/ubuntu/Mailing-List-API/venv/bin/gunicorn --bind 0.0.0.0:5000 wsgi:app -k gthread -w 4 --threads 4
+ExecStart=sudo /home/ubuntu/Mailing-List-API/venv/bin/gunicorn --bind 0.0.0.0:5000 wsgi:app -k gthread -w 4 --threads 1
 [Install]
 WantedBy=multi-user.target
 ```
