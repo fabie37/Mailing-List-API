@@ -109,5 +109,5 @@ def recipients_delete(delete_hash: str = Route(pattern=r'\b[A-Fa-f0-9]{64}\b')):
     return delete_a_recipient(delete_hash)
     
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0')
